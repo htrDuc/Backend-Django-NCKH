@@ -27,6 +27,7 @@ def predictRandomForestFile(request):
     filePath='.'+filePathName
 
     data =pd.read_csv(filePath)
+    data = data.dropna(how='any',axis=0)
     score=modelRandomForest.predict_proba(data)[:,-1]
 
     score={j:k for j,k in zip(data['Loan_ID'],score)}
@@ -52,6 +53,7 @@ def predictDecisionTreeFile(request):
     filePath='.'+filePathName
 
     data =pd.read_csv(filePath)
+    data = data.dropna(how='any',axis=0)
     score=modelDecisionTree.predict(data)
     score={j:k for j,k in zip(data['Loan_ID'],score)}
 
@@ -77,6 +79,7 @@ def predictNaiveBayesFile(request):
     filePath='.'+filePathName
 
     data =pd.read_csv(filePath)
+    data = data.dropna(how='any',axis=0)
     score=modelGaussianNB.predict(data)
     score={j:k for j,k in zip(data['Loan_ID'],score)}
 
